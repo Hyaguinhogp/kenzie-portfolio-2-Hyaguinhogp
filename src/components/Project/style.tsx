@@ -17,6 +17,17 @@ export const ProjectStackTech = styled("span", {
   borderRadius: "$2",
 });
 
+export const HomepageContainer = styled("figure", {
+  width: "100%",
+  height: "60%",
+  overflow: "hidden",
+  borderRadius: "10px"
+});
+
+export const HomepageContent = styled("img", {
+  width: "100%",
+});
+
 export const ProjectLinks = styled(Flex, {
   marginTop: "2.25rem",
 });

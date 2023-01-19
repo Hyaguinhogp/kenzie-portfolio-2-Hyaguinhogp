@@ -5,15 +5,20 @@ import {
   ProjectStackTech,
   ProjectLink,
   ProjectLinks,
+  HomepageContainer,
+  HomepageContent,
 } from "./style";
 
 import { Text } from "@/styles/Text";
 import { useEffect, useState } from "react";
 import { FaGithub, FaShare } from "react-icons/fa";
 import { userData } from "@/utils/userData";
+import { projects } from "@/utils/projectsData";
+import nukenzie from "../../assets/nukenzie-homepage.png"
 
 interface ReposType {
   id: number;
+  img: string;
   name: string;
   language: string;
   description: string;
@@ -22,29 +27,16 @@ interface ReposType {
 }
 
 export const Project = (): JSX.Element => {
-  const [repositories, setRepositories] = useState<ReposType[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch(
-        `https://api.github.com/users/${userData.githubUser}/repos?sort=created&direction=desc`
-      );
-
-      const json = await data.json();
-
-      setRepositories(json);
-
-      return json;
-    };
-
-    fetchData();
-  }, []);
+  const [repositories, setRepositories] = useState<ReposType[]>(projects);
 
   return (
     <>
       {repositories &&
         repositories?.map?.((repository) => (
           <ProjectWrapper key={repository.id}>
+            <HomepageContainer>
+              <HomepageContent src={repository.img} />
+            </HomepageContainer>
             <ProjectTitle
               as="h2"
               type="heading3"
@@ -83,7 +75,7 @@ export const Project = (): JSX.Element => {
               {repository.homepage && (
                 <ProjectLink
                   target="_blank"
-                  href={`https://${repository.homepage}`}
+                  href={`${repository.homepage}`}
                 >
                   <FaShare /> See demo
                 </ProjectLink>
